@@ -1,4 +1,3 @@
-"""Readable numeric features for one labelled lost/found report pair."""
 
 from __future__ import annotations
 
@@ -19,13 +18,14 @@ FEATURE_NAMES = (
 
 
 def jaccard(left: set[str], right: set[str]) -> float:
-    """Share of unique words present in both descriptions."""
+    """Return the Jaccard similarity of two sets."""
     if not left or not right:
         return 0.0
     return len(left & right) / len(left | right)
 
 
 def _agreement(lost: Report, found: Report, field: str) -> tuple[int, int]:
+    """Return a pair of mutually exclusive signals for one structured attribute."""
     left = normalize_scalar(getattr(lost, field))
     right = normalize_scalar(getattr(found, field))
     if not left or not right:
@@ -34,9 +34,11 @@ def _agreement(lost: Report, found: Report, field: str) -> tuple[int, int]:
 
 
 def pair_features(lost: Report, found: Report) -> dict[str, float | int]:
+    """Return the complete, ordered feature vector for one candidate pair. """
     if lost.report_type != "lost" or found.report_type != "found":
         raise ValueError("Expected a lost report followed by a found report")
     result: dict[str, float | int] = {
+        # Similarity features preserve partial evidence from free-text fields.
         "description_similarity": jaccard(tokenize(lost.description), tokenize(found.description)),
         "distinctive_feature_similarity": jaccard(
             tokenize(" ".join(lost.distinctive_features)),
@@ -44,12 +46,14 @@ def pair_features(lost: Report, found: Report) -> dict[str, float | int]:
         ),
         "location_similarity": jaccard(tokenize(lost.location), tokenize(found.location)),
     }
+    # Match/conflict pairs let the classifier learn different weights for
+    # positive evidence and for an explicit disagreement.
     for field in ("category", "colour", "brand", "model", "material"):
         match, conflict = _agreement(lost, found, field)
         result[f"{field}_match"] = match
         result[f"{field}_conflict"] = conflict
-    # Keep a fixed numeric value for unknown times; the 48-hour cap also stops
-    # extreme date gaps from dominating the other comparison features.
+    # Use one bounded numeric feature so large date gaps cannot dominate the
+    # other comparisons. Unknown timestamps receive the same maximum value.
     if lost.reported_at and found.reported_at:
         hours = abs((found.reported_at - lost.reported_at).total_seconds()) / 3600
         result["time_difference_hours"] = min(hours, 48.0)
