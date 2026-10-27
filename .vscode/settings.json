@@ -1,3 +1,5 @@
 {
-  "python.defaultInterpreterPath": "${workspaceFolder}/.venv"
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv",
+  "explorer.excludeGitIgnore": false,
+  "explorer.autoReveal": true
 }
