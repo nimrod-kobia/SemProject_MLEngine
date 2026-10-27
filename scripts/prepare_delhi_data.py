@@ -45,11 +45,15 @@ def prepare(source: Path = SOURCE, output: Path = OUTPUT, report_path: Path = RE
     for index, row in enumerate(rows, 1):
         if None in row:
             raise ValueError(f"Unexpected extra field on data row {index}")
+        # Count exact repeats for the audit, but keep every source row so the
+        # cleaned copy can still be traced back to the original CSV.
         key = tuple(row[name] for name in COLUMNS)
         if key in seen:
             duplicates += 1
         seen.add(key)
         clean = {"source_row": index}
+        # Empty values stay empty. Filling them with guessed item attributes
+        # would turn missing source evidence into invented model inputs.
         for name in COLUMNS:
             value = normalize(row[name] or "")
             if value != (row[name] or ""):

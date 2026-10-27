@@ -18,11 +18,15 @@ from .feature_builder import FEATURE_NAMES
 
 def new_classifier():
     # Scaling is fitted inside each fold, so validation rows cannot influence it.
+    # Class weighting offsets the constructed exercise's 1:2 label ratio;
+    # it does not correct the uncertainty of the assumed negative labels.
     model = LogisticRegression(max_iter=1000, class_weight="balanced", random_state=42)
     return make_pipeline(StandardScaler(), model)
 
 
 def metrics(y_true, probabilities, threshold=0.5):
+    # Apply one explicit threshold to every split so precision and recall
+    # describe the same decision rule throughout the experiment.
     predictions = (np.asarray(probabilities) >= threshold).astype(int)
     return {
         "precision": float(precision_score(y_true, predictions, zero_division=0)),

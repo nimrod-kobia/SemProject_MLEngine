@@ -48,6 +48,8 @@ def pair_features(lost: Report, found: Report) -> dict[str, float | int]:
         match, conflict = _agreement(lost, found, field)
         result[f"{field}_match"] = match
         result[f"{field}_conflict"] = conflict
+    # Keep a fixed numeric value for unknown times; the 48-hour cap also stops
+    # extreme date gaps from dominating the other comparison features.
     if lost.reported_at and found.reported_at:
         hours = abs((found.reported_at - lost.reported_at).total_seconds()) / 3600
         result["time_difference_hours"] = min(hours, 48.0)

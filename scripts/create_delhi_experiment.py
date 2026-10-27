@@ -71,6 +71,8 @@ def build() -> dict:
 
     claim_rows, pair_rows, feature_rows = [], [], []
     found_ids = set()
+    # Each claim is derived from its positive found row. This defines an
+    # exercise label; it does not establish a real passenger's ownership.
     for positive, hard, random_negative in zip(positives, hard_negatives, random_negatives):
         source_id = int(positive["source_row"])
         claim_id = f"synthetic-delhi-{source_id:05d}"
@@ -120,6 +122,8 @@ def build() -> dict:
 
     lost_ids = sorted(row["report_id"] for row in claim_rows)
     rng.shuffle(lost_ids)
+    # Split claim IDs before evaluation so all three candidates for a claim
+    # remain together and its wording cannot leak into the other partition.
     test_ids = set(lost_ids[:round(len(lost_ids) * 0.3)])
     split = {"seed": SEED, "strategy": "Group all candidate pairs by synthetic lost claim; found rows are unique", "splits": {}}
     for name, ids in (("development", set(lost_ids) - test_ids), ("test", test_ids)):
