@@ -18,14 +18,14 @@ FEATURE_NAMES = (
 
 
 def jaccard(left: set[str], right: set[str]) -> float:
-    """Return the Jaccard similarity of two sets."""
+    ##Return the Jaccard similarity of two sets.
     if not left or not right:
         return 0.0
     return len(left & right) / len(left | right)
 
 
 def _agreement(lost: Report, found: Report, field: str) -> tuple[int, int]:
-    """Return a pair of mutually exclusive signals for one structured attribute."""
+    ##Return a pair of mutually exclusive signals for one structured attribute.
     left = normalize_scalar(getattr(lost, field))
     right = normalize_scalar(getattr(found, field))
     if not left or not right:

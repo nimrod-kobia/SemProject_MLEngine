@@ -1,9 +1,6 @@
-"""Make a reproducible *synthetic* pairing exercise from real found-item rows.
-
-The source contains no lost claims or confirmed handovers. Positive pairs below
-are true only by construction; negative pairs are assumptions about separate
-source rows. Keep these local files out of Git and do not report their metrics
-as accuracy on real lost-and-found cases.
+"""Build a reproducible synthetic pairing set from real found-item rows.
+The source has no true lost claims or confirmed matches, so labels are
+constructed assumptions. 
 """
 
 import csv
