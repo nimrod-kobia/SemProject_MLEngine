@@ -491,6 +491,8 @@ def decision(claim_id: str, body: Decision, user=Depends(identity), client=Depen
         lost_ref = client.collection("lost_reports").document(row["lost_id"])
         found = found_ref.get(transaction=transaction).to_dict()
         lost = lost_ref.get(transaction=transaction).to_dict()
+        if found is None or lost is None:
+            raise HTTPException(404, "Claim reports are no longer available")
         allowed = {"pending": {"approved", "rejected"}, "approved": {"collected", "rejected"}}
         if body.status not in allowed.get(row["status"], set()):
             raise HTTPException(409, "Invalid claim transition")

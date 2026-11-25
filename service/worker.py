@@ -30,8 +30,11 @@ def process_job(client, ref, matcher):
     source_ref = client.collection(f"{job['report_type']}_reports").document(job["report_id"])
     try:
         source = source_ref.get().to_dict()
+        if source is None:
+            raise ValueError("Source report no longer exists")
         opposite = "found" if job["report_type"] == "lost" else "lost"
-        candidates = client.collection(f"{opposite}_reports").limit(201).stream()
+        candidates = client.collection(f"{opposite}_reports").where(
+            filter=firestore.FieldFilter("status", "==", "active")).limit(201).stream()
         candidates = [item.to_dict() for item in candidates]
         if len(candidates) > 200:
             raise ValueError("Candidate limit exceeded; refine retrieval before processing")
@@ -59,7 +62,7 @@ def process_job(client, ref, matcher):
         @firestore.transactional
         def finish(transaction):
             current = ref.get(transaction=transaction).to_dict()
-            if current.get("lease") != lease:
+            if not current or current.get("lease") != lease:
                 return
             # Read every existing pair before writing, so concurrent jobs and retries
             # do not reset read alerts or create duplicates for the same suggestion.
@@ -83,11 +86,13 @@ def process_job(client, ref, matcher):
         @firestore.transactional
         def fail(transaction):
             current = ref.get(transaction=transaction).to_dict()
-            if current.get("lease") != lease:
+            if not current or current.get("lease") != lease:
                 return
+            source_exists = source_ref.get(transaction=transaction).exists
             status = "failed" if current["attempts"] >= 3 else "pending"
             transaction.update(ref, {"status": status, "lease_until": time.time() + 15})
-            transaction.update(source_ref, {"matching_status": status})
+            if source_exists:
+                transaction.update(source_ref, {"matching_status": status})
         fail(client.transaction())
     return True
 

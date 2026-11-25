@@ -4,6 +4,8 @@ ICS 3202 · Deliverable 3 | Local presentation
 
 This repository contains the Python matching engine, evaluated notebook, historical Logistic Regression baseline, and local authenticated backend. The companion [Android app](https://github.com/luiz-zer0/MAD_project/tree/codex/louis-deliverable3-demo) is maintained separately.
 
+See also the [submission reproduction guide](docs/SUBMISSION.md).
+
 ## Start here
 
 | Resource | Purpose |

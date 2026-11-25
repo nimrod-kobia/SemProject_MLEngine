@@ -1,0 +1,37 @@
+found_id,item_group_id,category,description,colour,brand,distinguishing_attributes,location,event_date,report_status,source_type,split
+f-g001,g001,plastic_water_bottle,Clear plastic bottle with orange flip lid,clear,,,library,2026-10-04,active,ai_constructed_fictional,train
+f-g002,g002,metallic_bottle,Silver insulated flask with dent near base,silver,,,cafeteria,2026-10-06,active,ai_constructed_fictional,train
+f-g003,g003,pencil_pouch,Navy canvas pencil case with yellow zip,navy,,,msb,2026-10-05,active,ai_constructed_fictional,train
+f-g004,g004,usb_cable,Short white USB C cable with green tape,white,,,library,2026-10-07,active,ai_constructed_fictional,train
+f-g005,g005,laptop_charger,Black Dell 65W power adapter with frayed end,black,Dell,,msb,2026-10-09,active,ai_constructed_fictional,train
+f-g006,g006,mouse,Red wireless computer mouse with missing battery cover,red,,,cafeteria,2026-10-08,active,ai_constructed_fictional,train
+f-g007,g007,sweater,Grey knitted pullover with blue cuff stitching,grey,,,library,2026-10-10,active,ai_constructed_fictional,train
+f-g008,g008,calculator,Black Casio scientific calculator with cracked corner,black,Casio,,msb,2026-10-12,active,ai_constructed_fictional,train
+f-g009,g009,plastic_water_bottle,Purple plastic bottle with white mountain sticker,purple,,,library,2026-10-11,active,ai_constructed_fictional,train
+f-g010,g010,metallic_bottle,Blue steel bottle with chipped rim,blue,,,msb,2026-10-13,active,ai_constructed_fictional,train
+f-g011,g011,pencil_pouch,Black mesh pencil pouch with triangular pull,black,,,cafeteria,2026-10-15,active,ai_constructed_fictional,train
+f-g012,g012,usb_cable,Long braided black USB C cord with red sleeve,black,,,library,2026-10-14,active,ai_constructed_fictional,train
+f-g013,g013,laptop_charger,Grey HP 90W charger with blue connector,grey,HP,,msb,2026-10-16,active,ai_constructed_fictional,train
+f-g014,g014,headphones,White over ear headset with taped left cup,white,,,cafeteria,2026-10-18,active,ai_constructed_fictional,train
+f-g015,g015,umbrella,Small yellow folding umbrella with bent handle,yellow,,,library,2026-10-17,active,ai_constructed_fictional,train
+f-g016,g016,spectacle_case,Green hard glasses case with scratched clasp,green,,,msb,2026-10-19,active,ai_constructed_fictional,train
+f-g017,g017,plastic_water_bottle,Green plastic bottle with black carrying loop,green,,,cafeteria,2026-10-21,active,ai_constructed_fictional,validation
+f-g018,g018,metallic_bottle,Matte black steel flask with silver base,black,,,library,2026-10-20,active,ai_constructed_fictional,validation
+f-g019,g019,pencil_pouch,Pink striped pencil case with broken zip,pink,,,msb,2026-10-22,active,ai_constructed_fictional,validation
+f-g020,g020,usb_cable,Blue micro USB cable with knot near plug,blue,,,cafeteria,2026-10-24,active,ai_constructed_fictional,validation
+f-g021,g021,laptop_charger,Black Lenovo 65W adapter with nicked cable,black,Lenovo,,library,2026-10-23,active,ai_constructed_fictional,validation
+f-g022,g022,mouse,Silver Logitech mouse with purple sticker,silver,Logitech,,msb,2026-10-25,active,ai_constructed_fictional,validation
+f-g023,g023,calculator,Blue Casio calculator with missing key cover,blue,Casio,,cafeteria,2026-10-27,active,ai_constructed_fictional,validation
+f-g024,g024,spectacles,Round black eyeglasses with loose right arm,black,,,library,2026-10-26,active,ai_constructed_fictional,validation
+f-g025,g025,plastic_water_bottle,Translucent blue bottle with yellow replacement cap and white RK mark,blue,,,library,2026-11-04,active,ai_constructed_fictional,test
+f-g026,g026,plastic_water_bottle,Blue gym bottle with white screw top and faded football logo,blue,,,cafeteria,2026-11-05,active,ai_constructed_fictional,test
+f-g027,g027,laptop_charger,Black HP 65W adapter with white tape around the plug,black,HP,,msb,2026-11-06,active,ai_constructed_fictional,test
+f-g028,g028,laptop_charger,Black Lenovo 65W adapter with a small X scratched on the casing,black,Lenovo,,library,2026-11-06,active,ai_constructed_fictional,test
+f-g029,g029,pencil_pouch,Black canvas pencil pouch with red zipper and one torn corner,black,,,cafeteria,2026-11-07,active,ai_constructed_fictional,test
+f-g030,g030,pencil_pouch,Black pencil case with red side stripe and silver zip pull,black,,,msb,2026-11-07,active,ai_constructed_fictional,test
+f-g031,g031,metallic_bottle,Teal steel flask with dent under silver neck,teal,,,library,2026-11-08,active,ai_constructed_fictional,test
+f-g032,g032,metallic_bottle,Teal metal bottle with silver neck and peeling leaf sticker,teal,,,cafeteria,2026-11-08,active,ai_constructed_fictional,test
+f-g033,g033,spectacle_case,Black hard glasses case with gold hinge and shallow scrape,black,,,msb,2026-11-09,active,ai_constructed_fictional,test
+f-g034,g034,spectacle_case,Black glasses case with gold clip and stitched edge,black,,,library,2026-11-09,active,ai_constructed_fictional,test
+f-g035,g035,usb_cable,White braided USB C lead with blue tape near the end,white,,,cafeteria,2026-11-10,active,ai_constructed_fictional,test
+f-g036,g036,usb_cable,White braided USB C cord with blue plug housing,white,,,library,2026-11-10,active,ai_constructed_fictional,test

@@ -1,0 +1,18 @@
+{
+  "version": "v2",
+  "source_type": "AI-authored controlled fiction, inventory-informed categories",
+  "previously_observed_v1_cases_used_for": "training and validation only",
+  "new_held_out_test_file_sha256": "4d7f0b831ae2141316559d113bc41cd473d403158dd8fa87dcf4fe64196e6cb5",
+  "item_groups_by_split": {
+    "train": 16,
+    "validation": 8,
+    "test": 12
+  },
+  "found_count": 36,
+  "lost_count": 43,
+  "positive_labels": 36,
+  "negative_labels": 428,
+  "no_match_queries": 7,
+  "candidate_pool_size": 36,
+  "independent_review": "pending"
+}

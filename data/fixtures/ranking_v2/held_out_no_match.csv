@@ -1,0 +1,5 @@
+lost_id,category,description,colour,brand,location,date_lost,scenario
+nm-v2-01,plastic_water_bottle,Plain blue bottle with no stickers or marks,blue,,library,2026-11-05,same_category_no_identity
+nm-v2-02,laptop_charger,Black 65 watt laptop power supply; brand and tip unknown,black,,msb,2026-11-06,ambiguous_charger
+nm-v2-03,spectacle_case,Dark glasses box with gold coloured clasp,black,,cafeteria,2026-11-09,ambiguous_case
+nm-v2-04,umbrella,Small folded umbrella with broken wooden handle,black,,library,2026-11-10,absent_category_counterpart

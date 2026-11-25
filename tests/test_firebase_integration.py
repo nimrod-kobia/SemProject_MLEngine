@@ -91,9 +91,18 @@ def test_end_to_end_persistence_matching_claims_and_access():
     candidate = client.get(f"/v1/matches/{match_id}/candidate", headers=student).json()["candidate"]
     assert candidate["id"] == found_id and "description" not in candidate and "photo_reference" not in candidate
     assert client.get(f"/v1/matches/{match_id}/candidate", headers=stranger).status_code == 403
+    assert client.get(f"/v1/matches/missing-{uuid4().hex}/candidate", headers=student).status_code == 404
     proof = {"ownership_details": "A small scratch is inside the left pocket."}
     assert client.post(f"/v1/matches/{match_id}/claim", json=proof, headers=stranger).status_code == 403
     assert client.post(f"/v1/matches/{match_id}/claim", json=proof, headers=student).status_code == 201
+    stale_match = f"stale_{uuid4().hex}"
+    store.collection("matches").document(stale_match).set({
+        "id": stale_match, "owner_uid": auth.verify_id_token(student["Authorization"].split()[1], app=firebase_app())["uid"],
+        "lost_id": "missing-lost", "found_id": "missing-found"
+    })
+    unavailable = client.post(f"/v1/matches/{stale_match}/claim", json=proof, headers=student)
+    assert unavailable.status_code == 404 and "no longer available" in unavailable.json()["detail"]
+    assert client.post(f"/v1/matches/missing-{uuid4().hex}/claim", json=proof, headers=student).status_code == 404
     assert client.post(f"/v1/claims/{match_id}/decision", json={"status": "approved"}, headers=student).status_code == 403
     assert client.post(f"/v1/claims/{match_id}/decision", json={"status": "collected"}, headers=office).status_code == 409
     assert client.post(f"/v1/claims/{match_id}/decision", json={"status": "approved"}, headers=office).status_code == 200
